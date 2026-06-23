@@ -25,7 +25,7 @@ const images = [
   <div class="gallery-grid">
     {images.map((file) => (
       <div class="gallery-photo piece-fast" data-piece>
-        <img src={`/${file}`} alt="Trabajo de Tamara Margüenda" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}${file}`} alt="Trabajo de Tamara Margüenda" loading="lazy" />
       </div>
     ))}
   </div>
