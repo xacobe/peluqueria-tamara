@@ -1,0 +1,69 @@
+---
+import CutLine from './CutLine.astro';
+import { dict, DEFAULT_LANG, type DictKey } from '../i18n/dict';
+
+const t = dict[DEFAULT_LANG];
+const reviews = [1, 2, 3].map((n) => ({
+  textKey: `rev${n}_text` as DictKey,
+  nameKey: `rev${n}_name` as DictKey,
+}));
+---
+
+<section id="opiniones" class="section" data-reveal>
+  <CutLine theme="light" />
+
+  <div class="eyebrow piece" data-piece><span data-i18n="reviews_eyebrow">{t.reviews_eyebrow}</span></div>
+  <h2 class="heading-section reviews-title piece" data-piece data-i18n="reviews_title">{t.reviews_title}</h2>
+
+  <div class="reviews-grid">
+    {reviews.map((rev) => (
+      <figure class="review-card piece-fast" data-piece>
+        <div class="review-quote">&ldquo;</div>
+        <blockquote data-i18n={rev.textKey}>{t[rev.textKey]}</blockquote>
+        <figcaption data-i18n={rev.nameKey}>{t[rev.nameKey]}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .reviews-title {
+    margin: 8px 0 clamp(26px, 3vw, 40px);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .review-card {
+    margin: 0;
+    padding: 28px 26px;
+    border: 1px solid rgba(44, 70, 54, .14);
+    border-radius: 5px;
+    background: var(--cream-card);
+  }
+
+  .review-quote {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 46px;
+    line-height: .4;
+    color: var(--accent);
+  }
+
+  .review-card blockquote {
+    margin: 14px 0 18px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--green);
+  }
+
+  .review-card figcaption {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--muted);
+  }
+</style>

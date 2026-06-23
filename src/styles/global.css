@@ -1,0 +1,256 @@
+:root {
+  --cream: #f4f2ec;
+  --cream-card: #faf9f4;
+  --green: #2c4636;
+  --green-deep: #1b2c22;
+  --green-footer: #11201a;
+  --ink: #1b2c22;
+  --body: #45564c;
+  --muted: #5a6b60;
+  --on-dark-muted: #c6d0c8;
+  --on-dark-muted-2: #9fb0a3;
+
+  /* Acento de marca. Opciones del handoff: Oro #a98c52, Coral #e35a4c,
+     Fucsia #d6336c, Esmeralda #1f9e7a, Cobalto #2f6bd8. */
+  --accent: #e35a4c;
+  --heading-font: 'Bodoni Moda', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Archivo', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--cream);
+}
+
+@keyframes snipTop {
+  from { transform: rotate(5deg); }
+  to { transform: rotate(-3deg); }
+}
+
+@keyframes snipBottom {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(3deg); }
+}
+
+@keyframes clipfall {
+  0% { opacity: 0; transform: translateY(-8px) rotate(0deg); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(72px) rotate(220deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Visibles por defecto: sin JS el contenido nunca debe quedar oculto.
+   La clase .js (añadida sincrónicamente en <head>) activa el estado
+   inicial oculto que la animación de revelado necesita. */
+.piece,
+.piece-fast {
+  --piece-y: -22px;
+}
+
+html.js .piece,
+html.js .piece-fast {
+  opacity: 0;
+  transform: translateY(var(--piece-y));
+}
+
+html.js .piece {
+  transition: transform .6s cubic-bezier(.2, .85, .25, 1), opacity .7s ease;
+}
+
+html.js .piece-fast {
+  transition: transform .55s cubic-bezier(.2, .85, .25, 1), opacity .7s ease;
+}
+
+html.js .piece.is-revealed,
+html.js .piece-fast.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.heading-hero {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.01em;
+  font-size: clamp(52px, 9.5vw, 140px);
+  overflow-wrap: break-word;
+}
+
+.heading-section {
+  margin: 8px 0 6px;
+  font-family: var(--heading-font);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.01em;
+  font-size: clamp(40px, 6.5vw, 88px);
+  overflow-wrap: break-word;
+}
+
+/* Estructura de sección compartida por Servicios, Galería, Opiniones y Contacto. */
+.section {
+  padding: clamp(20px, 3vw, 32px) clamp(16px, 4vw, 52px) clamp(56px, 7vw, 96px);
+}
+
+.section--dark {
+  background: var(--green-deep);
+  color: var(--cream);
+}
+
+.section-sub {
+  margin: 0 0 clamp(26px, 3vw, 40px);
+  max-width: 36em;
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--body);
+}
+
+.section-sub--dark {
+  color: var(--on-dark-muted);
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 28px;
+  border-radius: 999px;
+}
+
+.btn-fill {
+  background: var(--green-deep);
+  color: var(--cream);
+  transition: background .25s ease;
+}
+.btn-fill:hover {
+  background: var(--green);
+}
+
+.btn-outline {
+  border: 1px solid rgba(44, 70, 54, .35);
+  color: var(--green);
+  transition: border-color .25s ease, background .25s ease;
+}
+.btn-outline:hover {
+  border-color: var(--green);
+  background: rgba(44, 70, 54, .05);
+}
+
+.btn-cream {
+  background: var(--cream);
+  color: var(--green-deep);
+  transition: background .25s ease;
+}
+.btn-cream:hover {
+  background: var(--accent);
+}
+
+/* Barra de corte (tijeras + línea punteada) que encabeza cada sección. */
+.cut-bar {
+  position: relative;
+  height: 40px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+  overflow: visible;
+}
+.cut-bar--light { --cut-color: var(--green); }
+.cut-bar--dark { --cut-color: var(--cream); }
+
+.cut-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  border-top: 2px dashed var(--cut-color);
+  opacity: .4;
+}
+html.js .cut-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  /* Transición corta: el progreso lo fija el scroll (site.ts), esto solo
+     amortigua el salto entre frames de scroll consecutivos. */
+  transition: transform .1s linear;
+}
+
+.cut-clip {
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 15px;
+  background: var(--cut-color);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.cut-scissors {
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  color: var(--cut-color);
+  transform: translate(0, -50%);
+}
+html.js .cut-scissors {
+  transition: transform .1s linear;
+}
+
+.cut-scissors svg {
+  display: block;
+  overflow: visible;
+}
+.scissors-blade-top {
+  transform-origin: 64px 32px;
+  transform-box: view-box;
+  animation: snipTop .5s ease-in-out infinite alternate;
+}
+.scissors-blade-bottom {
+  transform-origin: 64px 32px;
+  transform-box: view-box;
+  animation: snipBottom .5s ease-in-out infinite alternate;
+}
+
+/* Defensa en profundidad: con prefers-reduced-motion, mostrar todo
+   sin animación incluso si la lógica de revelado en JS fallara.
+   cut-line/cut-scissors no fuerzan transform: su valor final correcto
+   (línea trazada, tijeras al final del recorrido) lo fija site.ts. */
+@media (prefers-reduced-motion: reduce) {
+  html.js .piece,
+  html.js .piece-fast {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html.js .cut-line,
+  html.js .cut-scissors {
+    transition: none !important;
+  }
+  html.js [data-clip] {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

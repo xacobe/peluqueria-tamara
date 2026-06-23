@@ -1,0 +1,78 @@
+---
+import { dict, DEFAULT_LANG } from '../i18n/dict';
+
+const t = dict[DEFAULT_LANG];
+---
+
+<header class="hero" data-reveal>
+  <div class="eyebrow piece" data-piece>
+    <span data-i18n="hero_eyebrow">{t.hero_eyebrow}</span>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <h1 class="heading-hero">
+        <span class="hero-line piece" data-piece data-i18n="hero_t1" style="color: var(--ink)">{t.hero_t1}</span>
+        <span class="hero-line piece" data-piece data-i18n="hero_t2" style="color: var(--accent)">{t.hero_t2}</span>
+      </h1>
+      <p class="hero-sub piece" data-piece data-i18n="hero_sub">{t.hero_sub}</p>
+      <div class="hero-ctas piece" data-piece>
+        <a data-i18n="hero_cta1" href="#contacto" class="btn btn-fill">{t.hero_cta1}</a>
+        <a data-i18n="hero_cta2" href="#galeria" class="btn btn-outline">{t.hero_cta2}</a>
+      </div>
+    </div>
+    <div class="hero-photo piece" data-piece>
+      <img src="/tamara-interior-peluqueria.jpg" alt="Interior de la peluquería Tamara Margüenda" class="hero-photo-img" />
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    padding: clamp(40px, 7vw, 92px) clamp(16px, 4vw, 52px) clamp(48px, 7vw, 90px);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+    margin-top: clamp(20px, 3vw, 34px);
+  }
+
+  .hero-line {
+    display: block;
+    --piece-y: -26px;
+  }
+
+  .hero-sub {
+    max-width: 30em;
+    margin: clamp(20px, 2.4vw, 30px) 0 0;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--body);
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: clamp(26px, 3vw, 36px);
+  }
+
+  .hero-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    overflow: hidden;
+    background: repeating-linear-gradient(135deg, #e7e4d8 0 16px, #efece2 16px 32px);
+    border: 1px solid rgba(44, 70, 54, .12);
+  }
+
+  .hero-photo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

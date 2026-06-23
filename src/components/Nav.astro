@@ -1,0 +1,108 @@
+---
+import { dict, DEFAULT_LANG } from '../i18n/dict';
+
+const t = dict[DEFAULT_LANG];
+---
+
+<nav>
+  <a href="#top" class="logo-link">
+    <img src="/logo-tamara-marguenda.jpg" alt="Tamara Margüenda" width="180" height="48" />
+  </a>
+  <div class="nav-links">
+    <a data-i18n="nav_services" href="#servicios">{t.nav_services}</a>
+    <a data-i18n="nav_gallery" href="#galeria">{t.nav_gallery}</a>
+    <a data-i18n="nav_reviews" href="#opiniones">{t.nav_reviews}</a>
+    <a data-i18n="nav_contact" href="#contacto">{t.nav_contact}</a>
+  </div>
+  <div class="nav-actions">
+    <div class="lang-switch">
+      <button type="button" data-lang="es" class="is-active">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="gl">GL</button>
+    </div>
+    <a data-i18n="nav_cta" href="#contacto" class="btn btn-fill nav-cta">{t.nav_cta}</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 12px clamp(16px, 4vw, 52px);
+    background: rgba(244, 242, 236, .82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(44, 70, 54, .12);
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-link img {
+    height: 48px;
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(14px, 2.2vw, 30px);
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    transition: color .2s ease;
+  }
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lang-switch {
+    display: flex;
+    border: 1px solid rgba(44, 70, 54, .25);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .lang-switch button {
+    border: 0;
+    cursor: pointer;
+    padding: 7px 11px;
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    background: transparent;
+    color: var(--green);
+  }
+
+  .lang-switch button.is-active {
+    background: var(--green);
+    color: var(--cream);
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    padding: 9px 18px;
+  }
+</style>

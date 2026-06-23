@@ -1,0 +1,76 @@
+---
+import CutLine from './CutLine.astro';
+import { dict, DEFAULT_LANG, type DictKey } from '../i18n/dict';
+
+const t = dict[DEFAULT_LANG];
+
+const services = [1, 2, 3, 4, 5, 6].map((n) => ({
+  nameKey: `svc${n}_name` as DictKey,
+  descKey: `svc${n}_desc` as DictKey,
+  inverted: n === 6,
+}));
+---
+
+<section id="servicios" class="section" data-reveal>
+  <CutLine theme="light" />
+
+  <div class="eyebrow piece" data-piece><span data-i18n="services_eyebrow">{t.services_eyebrow}</span></div>
+  <h2 class="heading-section piece" data-piece data-i18n="services_title">{t.services_title}</h2>
+  <p class="section-sub piece" data-piece data-i18n="services_sub">{t.services_sub}</p>
+
+  <div class="services-grid">
+    {services.map((svc) => (
+      <div class:list={['service-card', 'piece-fast', { 'service-card--inverted': svc.inverted }]} data-piece>
+        <span class="service-name" data-i18n={svc.nameKey}>{t[svc.nameKey]}</span>
+        <p class="service-desc" data-i18n={svc.descKey}>{t[svc.descKey]}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 24px;
+    border: 1px solid rgba(44, 70, 54, .14);
+    border-radius: 5px;
+    background: var(--cream-card);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    transition: transform .5s cubic-bezier(.2, .85, .25, 1), border-color .3s ease;
+  }
+  .service-card:hover {
+    border-color: var(--green);
+    transform: translateY(-5px);
+  }
+
+  .service-card--inverted {
+    background: var(--green-deep);
+    color: var(--cream);
+  }
+  .service-card--inverted:hover {
+    border-color: rgba(44, 70, 54, .14);
+  }
+  .service-card--inverted .service-desc {
+    color: var(--on-dark-muted);
+  }
+
+  .service-name {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .service-desc {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+</style>
