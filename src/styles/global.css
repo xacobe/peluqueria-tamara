@@ -13,6 +13,7 @@
   /* Acento de marca. Opciones del handoff: Oro #a98c52, Coral #e35a4c,
      Fucsia #d6336c, Esmeralda #1f9e7a, Cobalto #2f6bd8. */
   --accent: #e35a4c;
+  --accent-hover: #e07569;
   --heading-font: 'Bodoni Moda', serif;
 }
 
@@ -145,12 +146,12 @@ html.js .piece-fast.is-revealed {
 }
 
 .btn-fill {
-  background: var(--green-deep);
+  background: var(--accent);
   color: var(--cream);
   transition: background .25s ease;
 }
 .btn-fill:hover {
-  background: var(--green);
+  background: var(--accent-hover);
 }
 
 .btn-outline {
